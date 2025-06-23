@@ -13,98 +13,99 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          // Imagen de fondo
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/background.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          // Capa oscura para legibilidad
-          Container(color: Colors.black.withOpacity(0.3)),
-
-          // Formulario
-          SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                children: [
-                  const Text(
-                    'Create an Account',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                  const SizedBox(height: 20),
-                  _buildTextField('Full Name'),
-                  _buildTextField('Email'),
-                  _buildTextField('Password', obscure: true),
-                  _buildTextField('Confirm Password', obscure: true),
-                  _buildTextField('City'),
-                  _buildTextField('Country'),
-                  _buildTextField('Phone'),
-
-                  const SizedBox(height: 10),
-                  // Selector de rol
-                  Row(
-                    children: [
-                      Expanded(
-                        child: RadioListTile(
-                          title: const Text('Agricultural Producer', style: TextStyle(color: Colors.white)),
-                          value: 'Producer',
-                          groupValue: role,
-                          onChanged: (value) => setState(() => role = value),
-                        ),
-                      ),
-                      Expanded(
-                        child: RadioListTile(
-                          title: const Text('Distributor', style: TextStyle(color: Colors.white)),
-                          value: 'Distributor',
-                          groupValue: role,
-                          onChanged: (value) => setState(() => role = value),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Validaciones o navegación futura
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green.shade700,
-                      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 40),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+          child: Column(
+            children: [
+              const Icon(Icons.agriculture, size: 64, color: Colors.green),
+              const SizedBox(height: 12),
+              RichText(
+                textAlign: TextAlign.center,
+                text: const TextSpan(
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                  children: [
+                    TextSpan(
+                      text: 'Register to ',
+                      style: TextStyle(color: Colors.black),
                     ),
-                    child: const Text('SIGN UP'),
+                    TextSpan(
+                      text: 'AgroControl',
+                      style: TextStyle(color: Color(0xFF2FB95D)),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 24),
+              _buildTextField('Full Name'),
+              _buildTextField('Email'),
+              _buildTextField('Password', obscure: true),
+              _buildTextField('Confirm Password', obscure: true),
+              _buildTextField('City'),
+              _buildTextField('Country'),
+              _buildTextField('Phone'),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                    child: RadioListTile(
+                      title: const Text('Producer'),
+                      value: 'Producer',
+                      groupValue: role,
+                      activeColor: Colors.green,
+                      onChanged: (value) => setState(() => role = value),
+                    ),
                   ),
-                  const SizedBox(height: 20),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context); // Volver al login
-                    },
-                    child: RichText(
-                      text: const TextSpan(
-                        text: 'Already have an account? ',
-                        style: TextStyle(color: Colors.white),
-                        children: [
-                          TextSpan(
-                            text: 'Log In',
-                            style: TextStyle(
-                              color: Colors.lightGreenAccent,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
+                  Expanded(
+                    child: RadioListTile(
+                      title: const Text('Distributor'),
+                      value: 'Distributor',
+                      groupValue: role,
+                      activeColor: Colors.green,
+                      onChanged: (value) => setState(() => role = value),
                     ),
                   ),
                 ],
               ),
-            ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 40),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text('Sign Up', style: TextStyle(fontSize: 16)),
+              ),
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Already have an account? ",
+                    style: TextStyle(color: Color(0xFF7D7D7D)),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      'Log In',
+                      style: TextStyle(
+                        color: Color(0xFF2FB95D),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -114,16 +115,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: TextField(
         obscureText: obscure,
-        style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: const TextStyle(color: Colors.white),
-          border: const OutlineInputBorder(),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white54),
-          ),
+          border: OutlineInputBorder(),
+          prefixIcon: Icon(_iconForLabel(label)),
         ),
       ),
     );
+  }
+
+  IconData _iconForLabel(String label) {
+    switch (label) {
+      case 'Email':
+        return Icons.email_outlined;
+      case 'Password':
+      case 'Confirm Password':
+        return Icons.lock_outline;
+      case 'Phone':
+        return Icons.phone;
+      case 'Full Name':
+        return Icons.person_outline;
+      case 'City':
+        return Icons.location_city;
+      case 'Country':
+        return Icons.public;
+      default:
+        return Icons.edit;
+    }
   }
 }

@@ -10,100 +10,123 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Welcome to AgroControl',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.agriculture, size: 64, color: Colors.green),
+                const SizedBox(height: 20),
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: const TextSpan(
+                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                    children: [
+                      TextSpan(
+                        text: 'Welcome to ',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      TextSpan(
+                        text: 'AgroControl',
+                        style: TextStyle(color: Color(0xFF2FB95D)),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 20),
+                ),
+                const SizedBox(height: 30),
+                const TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.email_outlined),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    border: OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.lock_outline),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Checkbox(value: true, onChanged: (_) {}),
+                    const Expanded(child: Text('Remember me for 30 days')),
+                    TextButton(
+                      onPressed: () {
+                      // TODO: Forgot password logic
+                      },
+                      child: const Text('Forgot Password?'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    // Aquí podrías incluir lógica de validación si es necesario
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => const HomeScreen()),
                     );
                   },
-                  child: const Text('Log In'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text('Log In', style: TextStyle(fontSize: 16)),
                 ),
-
-                  const SizedBox(height: 10),
-                  const Text('or', style: TextStyle(color: Colors.grey)),
-                  const SizedBox(height: 10),
-                  TextField(
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                      border: OutlineInputBorder(),
+                const SizedBox(height: 16),
+                const Text('or', style: TextStyle(color: Colors.grey)),
+                const SizedBox(height: 16),
+                OutlinedButton.icon(
+                  onPressed: () {
+                // TODO: Google login logic
+                  },
+                  icon: const Icon(Icons.g_mobiledata, size: 28),
+                  label: const Text('Continue with Google'),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  TextField(
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      labelText: 'Password',
-                      border: OutlineInputBorder(),
+                ),
+                const SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Don't have an account yet? ",
+                      style: TextStyle(color: Color(0xFF7D7D7D)),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Checkbox(value: true, onChanged: (val) {}),
-                      const Text('Remember me for 30 days'),
-                    ],
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: const Text('Forgot Password?'),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Create Account'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green.shade800,
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const RegisterScreen()),
-                  );
-                },
-                child: RichText(
-                  text: const TextSpan(
-                    text: 'You don\'t have an account yet? ',
-                    style: TextStyle(color: Colors.black),
-                    children: [
-                      TextSpan(
-                        text: 'Register',
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const RegisterScreen()),
+                        );
+                      },
+                      child: const Text(
+                        'Register',
                         style: TextStyle(
-                          color: Colors.green,
+                          color: Color(0xFF2FB95D),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-                ],
-              ),
+                    ),
+                  ],
+                )
+              ],
             ),
           ),
         ),
       ),
     );
-
   }
 }

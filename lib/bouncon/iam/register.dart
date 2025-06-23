@@ -79,7 +79,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: const Text('Sign Up', style: TextStyle(fontSize: 16)),
+                child: const Text('Sign Up', style: TextStyle(fontSize: 16, color: Colors.black)),
               ),
               const SizedBox(height: 24),
               Row(
@@ -96,7 +96,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: const Text(
                       'Log In',
                       style: TextStyle(
-                        color: Color(0xFF2FB95D),
+                        color: Color(0xFF3B6939),
                         fontWeight: FontWeight.bold,
                       ),
                     ),

@@ -79,7 +79,7 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text('Log In', style: TextStyle(fontSize: 16)),
+                  child: const Text('Log In', style: TextStyle(fontSize: 16, color: Colors.black)),
                 ),
                 const SizedBox(height: 16),
                 const Text('or', style: TextStyle(color: Colors.grey)),
@@ -88,8 +88,8 @@ class LoginScreen extends StatelessWidget {
                   onPressed: () {
                 // TODO: Google login logic
                   },
-                  icon: const Icon(Icons.g_mobiledata, size: 28),
-                  label: const Text('Continue with Google'),
+                  icon: const Icon(Icons.g_mobiledata, size: 28, color: Colors.black),
+                  label: const Text('Continue with Google',style: TextStyle( color: Colors.black)),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
                     shape: RoundedRectangleBorder(
@@ -115,7 +115,7 @@ class LoginScreen extends StatelessWidget {
                       child: const Text(
                         'Register',
                         style: TextStyle(
-                          color: Color(0xFF2FB95D),
+                          color: Color(0xFF3B6939),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
